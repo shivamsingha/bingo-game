@@ -10,53 +10,54 @@ const board = new mongoose.Schema({
   numbers: [Boolean]
 })
 
-const userStats =new mongoose.Schema({
-  numGames:Number,
-  numWon:Number,
-  numLost:Number,
-  numTied:Number,
-  leastMoves:Number,
-  mostMoves:Number
+const userStats = new mongoose.Schema({
+  numGames: Number,
+  numWon: Number,
+  numLost: Number,
+  numTied: Number,
+  leastMoves: Number,
+  mostMoves: Number
 })
 
 const user = new mongoose.Schema({
   name: String,
   email: String,
   password: String,
-  stats:{
-    type:userStats
+  stats: {
+    type: userStats
   }
 })
 
-const lobbyOptions=new mongoose.Schema({
-  numPlayers:Number,
-  maxPlayers:Number,
-  hidden:Boolean,
-  password:String
+const lobbyOptions = new mongoose.Schema({
+  numPlayers: Number,
+  maxPlayers: Number,
+  hidden: Boolean,
+  isPasswordSet: Boolean,
+  password: String
 })
 
-const lobbyPlayers =new mongoose.Schema({
-  user:{
-    type:user
+const lobbyPlayers = new mongoose.Schema({
+  user: {
+    type: user
   },
-  board:{
-    type:board
+  board: {
+    type: board
   }
 })
 
 const lobby = new mongoose.Schema({
-  lobbyName:String,
-  players:{
-    type:lobbyPlayers
+  lobbyName: String,
+  players: {
+    type: [lobbyPlayers]
   },
   options: {
-    type:lobbyOptions
+    type: lobbyOptions
   },
-  status:Number
+  status: String
 })
 
-const lobbyList=new mongoose.Schema({
-  lobbies:{
-    type:[lobby]
+const lobbyList = new mongoose.Schema({
+  lobbies: {
+    type: [lobby]
   }
 })
